@@ -1,6 +1,6 @@
 module RPH
   # This plugin allows you to alleviate checking the #params
-  # hash directly, and provides a much more cleaner way.
+  # hash directly, and provides a much cleaner alternative.
   #
   # Old way(s):
   #   Project.new(params[:project]) unless params[:project].blank?
@@ -30,7 +30,7 @@ module RPH
       #    behaves exactly like <tt>has_<name>_params?</tt>,
       #    it's just a shorter version
       #
-      # Note: <name> is where you place whatever params key you
+      # Note: <name> is where you place whatever params key you'd
       #       normally use. For example, params[:user] would be:
       #         - blank_user_params?
       #         - has_user_params?
