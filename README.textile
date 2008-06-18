@@ -37,7 +37,7 @@ Note: @<name>_params?@ is nothing more than a shorter way to call @has_<name>_pa
 
 h2. Gotcha!
 
-One thing to keep in mind. Under the covers, this plugin uses @method_missing@ and parses out the crapola to get to the actualy params key. So, if you're using @method_missing@ somewhere in your controller (@application_controller@ perhaps?), if it's at all possible, make sure that you call @super@ if your reasons for using @method_missing@ aren't met. Otherwise, this plugin won't work ;-)
+One thing to keep in mind. Under the covers, this plugin uses @method_missing@ and parses out the crapola to get to the actual params key. So, if you're using @method_missing@ somewhere in your controller (@application_controller@ perhaps?), if it's at all possible, make sure that you call @super@ if your reasons for using @method_missing@ aren't met. Otherwise, this plugin won't work ;-)
 
 h2. License
 
