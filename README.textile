@@ -1,0 +1,44 @@
+h1. HasParams
+
+This plugin allows you to stop checking parameters via the params hash, in favor of a much cleaner alternative.
+
+h2. What's the point?
+
+Really, there is no point. And I wouldn't be surprised if I were the only one to think this is worthy of using, but here it is anyway. Have you ever written a line of code similar to this?
+
+<pre><code>Project.new(params[:project]) unless params[:project].blank?</code></pre>
+
+To me, the @params[:project].blank?@ part stinks up that line. So, I got rid of it. With has_params, you can do this instead:
+
+<pre><code>Project.new(params[:project]) unless blank_project_params?</code></pre>
+
+Much better.
+
+h2. Example(s)
+
+You get a few ways to check for params with this plugin. Rather than explain them, I'll just list the old way vs. the has_params way.
+
+h4. The "old way"
+
+<pre><code>
+  User.new(params[:user]) unless params[:user].blank?
+  User.new(params[:user]) if params[:user]
+</code></pre>
+
+h4. The "has_params way"
+
+<pre><code>
+  User.new(params[:user]) unless blank_user_params?
+  User.new(params[:user]) if has_user_params?
+  User.new(params[:user]) if user_params?
+</code></pre>
+
+Note: @<name>_params?@ is nothing more than a shorter way to call @has_<name>_params?@.
+
+h2. Gotcha!
+
+One thing to keep in mind. Under the covers, this plugin uses @method_missing@ and parses out the crapola to get to the actualy params key. So, if you're using @method_missing@ somewhere in your controller (@application_controller@ perhaps?), if it's at all possible, make sure that you call @super@ if your reasons for using @method_missing@ aren't met. Otherwise, this plugin won't work ;-)
+
+h2. License
+
+Copyright (c) 2008 Ryan Heath, released under the MIT license
