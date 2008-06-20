@@ -36,16 +36,11 @@ module RPH
       #         - has_user_params?
       #         - user_params?
       def method_missing(method, *args)
-        result = false
-        
-        if method.to_s.match(/^blank_(\w+)_params\?$/)
-          result = blank_target_params?($1)
-        elsif method.to_s.match(/^has_(\w+)_params\?$/)
-          result = has_target_params?($1)
-        elsif method.to_s.match(/^(\w+)_params\?$/)
-          result = has_target_params?($1)
-        else
-          super(method, *args) and return
+        result = case method.to_s
+          when /^blank_(\w+)_params\?$/ then blank_target_params?($1)
+          when /^has_(\w+)_params\?$/   then has_target_params?($1)
+          when /^(\w+)_params\?$/       then has_target_params?($1)
+          else super and return
         end
 
         !!result
@@ -61,7 +56,7 @@ module RPH
         # convenience method to check if the targeted
         # params are not blank
         def has_target_params?(key)
-          params && !params[key.to_sym].blank?
+          !blank_target_params?(key)
         end
     end
   end
